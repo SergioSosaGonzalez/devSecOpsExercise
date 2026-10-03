@@ -272,7 +272,8 @@ git push origin exercise/gitleaks-01-basico
 |---|---|---|---|
 | [Gitleaks](gitleaks/README.md) | Secret Scanning | Pre-commit / CI | ✅ 6 ejercicios |
 | [SonarQube](sonarqube/README.md) | SAST / Code Quality | IDE + CI/CD | ✅ 4 ejercicios |
-| _Próximamente..._ | | | |
+| [Trivy](trivy/README.md) | SCA / IaC Security / Secret Scanning | Commit → CI | ✅ 3 ejercicios |
+| [OWASP ZAP](owasp-zap/README.md) | DAST (Web Application Security) | Integración/CI | ✅ 3 ejercicios |
 
 ---
 

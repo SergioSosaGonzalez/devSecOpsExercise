@@ -1,0 +1,54 @@
+# ============================================================
+# FIXTURE DE LABORATORIO — Checkov · workflow de ejemplo
+# ============================================================
+# Este workflow NO se ejecuta: vive dentro de la carpeta del
+# ejercicio para que lo estudies y lo copies a tu repo de
+# práctica. Si lo copiaras a .github/workflows/ en la raíz del
+# repositorio del curso, el CI empezaría a correr de verdad y a
+# fallar por los fixtures que son deliberadamente inseguros.
+#
+# Nota: Checkov también escanea este fichero con el framework
+# `github_actions`, así que el propio workflow pasa por el escáner.
+
+name: checkov-iac
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  checkov:
+    name: Escaneo de IaC
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Ejecutar Checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: infra
+          external_checks_dirs: checks
+          skip_framework: secrets
+          output_format: cli,sarif
+          output_file_path: console,results.sarif
+          quiet: true
+          compact: true
+          baseline: .checkov.baseline
+
+      # El paso anterior falla el job cuando hay hallazgos nuevos.
+      # GitHub no ejecuta los pasos siguientes si el anterior
+      # falló, y sin este `if` el SARIF nunca se subiría.
+      - name: Subir resultados a GitHub Code Scanning
+        if: success() || failure()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif
+          category: checkov-iac

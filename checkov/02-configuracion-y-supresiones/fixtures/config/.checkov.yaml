@@ -1,0 +1,31 @@
+# ============================================================
+# Configuración de Checkov para el ejercicio 02
+# ============================================================
+# Este fichero NO se llama `.checkov.yaml` a propósito: mientras
+# esté aquí dentro, Checkov no lo carga solo y los números que
+# midas en el paso 1 no están contaminados por él. Se carga
+# explícitamente con `--config-file config/.checkov.yaml`.
+
+# Menos ruido en consola: sin bloques de código y solo los fallos.
+compact: true
+quiet: true
+
+# Solo el framework que nos interesa en este ejercicio. Sin esto,
+# Checkov también escanea los secretos del directorio.
+framework:
+  - terraform
+
+# Checks que la empresa ha decidido no aplicar. Cada exclusión
+# es una decisión, no un descuido: revisa las preguntas al final.
+skip-check:
+  - CKV_AWS_144   # replicación entre regiones: no aplica a los buckets de logs
+  - CKV_AWS_145   # el cifrado por defecto lo fija la cuenta, no el repositorio
+
+# Se ejecutan siempre, aunque los ignores el repositorio entero.
+check:
+  - CKV_AWS_24    # SSH no puede estar abierto a 0.0.0.0/0
+  - CKV_AWS_17    # ninguna base de datos puede ser pública
+  - CKV_AWS_20    # ningún bucket con ACL pública
+
+# Variables: Checkov resuelve los defaults para poder decidir.
+evaluate-variables: true

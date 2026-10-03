@@ -17,6 +17,34 @@ No adivines ni elijas tú. Si la nombra vagamente ("una de SCA"), pide una concr
 
 Después de que responda, **verifica la herramienta antes de escribir**: su instalación real, sus comandos, sus flags y su estado actual en 2026. Usa `websearch`/`webfetch` contra la documentación oficial. No escribas comandos de memoria — el curso entero se apoya en que los comandos funcionen.
 
+## Paso 0.5 — Carga la referencia UNA vez (no releas los módulos)
+
+Este paso es lo que más tiempo ahorra. **El estilo del curso ya está escrito abajo**, en las secciones de este mismo archivo. Los módulos existentes son solo la fuente de la que copiamos *detalles concretos*, y para eso bastan **4 lecturas fijas**:
+
+```bash
+# 1. Índice de herramientas del README raíz (una sola vez)
+sed -n '265,280p' README.md
+
+# 2. Estructura de títulos del README de un módulo (el "esqueleto")
+grep -n '^#' gitleaks/README.md
+
+# 3. Estructura de un ejercicio completo (el molde)
+cat gitleaks/03-configuracion-allowlists/README.md
+
+# 4. Un fixture, para ver el tono de los comentarios
+head -30 gitleaks/02-escaneo-basico/fixtures/app-basico/main.py
+```
+
+**Reglas duras de lectura:**
+
+- **`gitleaks/` y `sonarqube/` son de solo lectura.** No los re-leas, no los recorras con `find`, no abras sus otros ejercicios. No los modifiques.
+- **Nunca leas los dos módulos enteros.** Con los 4 comandos de arriba tienes el estilo. `gitleaks/03` es el molde de ejercicio; `sonarqube` solo se consulta si necesitas un detalle de cobertura o de `sonar-project.properties`.
+- **Lee un fixture, no todos.** Los fixtures son intercambiables una vez captado el tono.
+- **`AGENTS.md` de la raíz ya te lo sabes.** No lo releas.
+- No uses `Task`/`explore` para esto: el subagente reread todo el repo y es justo lo que quieres evitar.
+
+Todo lo demás del estilo —secciones del README de módulo, esqueleto del ejercicio, checklist, errores frecuentes— **está descrito en este archivo**. Si te falta un detalle, está aquí; no busques en los módulos.
+
 ## Paso 1 — Planifica (todowrite)
 
 Investiga y responde antes de escribir:
