@@ -93,14 +93,20 @@ devSecOpsExercise/
 ├── README.md                  ← Este documento (índice general del curso)
 ├── gitleaks/                  ← Carpeta de la herramienta
 │   ├── README.md              ← Introducción teórica a la herramienta
+│   ├── .gitleaksignore
 │   ├── 01-reconocimiento/     ← Ejercicios
-│   ├── 02-escaneo-basico/     ← Ejercicios
-│   └── 03-integracion-ci/     ← Ejercicios
-├── trivy/                     ← Carpeta de la herramienta
-│   ├── README.md
-│   ├── 01-dependencias/
-│   ├── 02-iac/
-│   └── 03-imagenes/
+│   ├── 02-escaneo-basico/
+│   ├── 03-configuracion-allowlists/
+│   ├── 04-pre-commit/
+│   ├── 05-ci-github-actions/
+│   └── 06-remediacion/
+├── sonarqube/                 ← Carpeta de la herramienta
+│   ├── README.md              ← Introducción teórica a la herramienta
+│   ├── .gitleaksignore
+│   ├── 01-instalacion-primer-analisis/
+│   ├── 02-clean-as-you-code/
+│   ├── 03-exclusiones-y-falsos-positivos/
+│   └── 04-ci-github-actions/
 └── ...                        ← Nuevas herramientas se añaden aquí
 ```
 
@@ -133,22 +139,52 @@ Cada carpeta de herramienta **debe** cumplir con lo siguiente:
    - `scripts/` — scripts auxiliares.
    - `config/` — archivos de configuración de ejemplo.
 
-5. **Nunca subas secretos reales** al repositorio. Todos los secretos usados en los ejercicios son ficticios y están diseñados para ser detectados por las herramientas.
+5. **Nunca subas secretos reales** al repositorio. Todos los secretos usados en los ejercicios son **ficticios**, están rotulados como tales y están diseñados para ser detectados por las herramientas (eso es justamente lo que se practica en los ejercicios).
 
 ### 2.3 Ejemplo de referencia: carpeta `gitleaks/`
 
 ```
 gitleaks/
 ├── README.md              ← Introducción a Gitleaks
+├── .gitleaksignore        ← Ignora los falsos positivos de los enunciados
 ├── 01-reconocimiento/
 │   ├── README.md
 │   └── fixtures/
 │       └── app-basico/
-└── 02-integracion-ci/
+└── 05-ci-github-actions/
     ├── README.md
     └── .github/
         └── workflows/
             └── gitleaks.yml
+```
+
+### 2.4 Ejemplo de referencia: carpeta `sonarqube/`
+
+```
+sonarqube/
+├── README.md              ← Introducción a SonarQube
+├── .gitleaksignore
+├── 01-instalacion-primer-analisis/
+│   ├── README.md
+│   └── fixtures/
+│       ├── sonar-project.properties
+│       ├── src/
+│       └── tests/
+├── 02-clean-as-you-code/
+│   └── fixtures/
+├── 03-exclusiones-y-falsos-positivos/
+│   └── fixtures/
+│       ├── sonar-project.properties
+│       ├── sonar-project.final.properties   ← la solución
+│       ├── src/
+│       ├── vendor/                          ← código generado
+│       └── tests/
+└── 04-ci-github-actions/
+    ├── README.md
+    └── .github/
+        └── workflows/
+            ├── sonar.yml
+            └── security-pipeline.yml        ← Gitleaks + SonarQube
 ```
 
 ---
@@ -234,7 +270,8 @@ git push origin exercise/gitleaks-01-basico
 
 | Herramienta | Categoría | Etapa del Shift Left | Estado |
 |---|---|---|---|
-| [Gitleaks](gitleaks/README.md) | Secret Scanning | Pre-commit / CI | En curso |
+| [Gitleaks](gitleaks/README.md) | Secret Scanning | Pre-commit / CI | ✅ 6 ejercicios |
+| [SonarQube](sonarqube/README.md) | SAST / Code Quality | IDE + CI/CD | ✅ 4 ejercicios |
 | _Próximamente..._ | | | |
 
 ---

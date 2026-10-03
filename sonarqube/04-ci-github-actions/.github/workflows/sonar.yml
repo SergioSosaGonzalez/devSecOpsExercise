@@ -1,0 +1,66 @@
+# Workflow base del ejercicio 04.
+# Cópialo a .github/workflows/sonar.yml en tu repositorio de práctica.
+#
+# Requisitos previos:
+#   · Secret  SONAR_TOKEN    (Settings → Secrets and variables → Actions)
+#   · Variable SONAR_HOST_URL (Settings → Secrets and variables → Actions)
+
+name: SonarQube
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sonarqube:
+    name: Análisis SonarQube
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          # Sin el historial completo el scanner pierde el análisis de SCM y el blame
+          fetch-depth: 0
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21      # Java 17 ya no tiene soporte desde SonarQube 26.8
+
+      - name: Cache de SonarQube
+        uses: actions/cache@v5
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      # v8 valida la firma OpenPGP del binario del scanner con gpg + dirmngr.
+      # Los runners alojados por GitHub ya los incluyen; en self-hosted hay
+      # que instalarlos o usar skipSignatureVerification: true.
+      - name: Ejecutar análisis
+        uses: SonarSource/sonarqube-scan-action@v8
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+
+      - name: Verificar Quality Gate
+        uses: SonarSource/sonarqube-quality-gate-action@v1
+        with:
+          pollingTimeoutSec: 600   # sin esto usa 300s por defecto
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}

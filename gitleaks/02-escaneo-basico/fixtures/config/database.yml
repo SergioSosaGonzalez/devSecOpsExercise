@@ -1,0 +1,23 @@
+# Configuración de base de datos - ARCHIVO DE PRUEBA
+# Contraseñas ficticias usadas únicamente para los ejercicios del curso.
+# Ninguna de estas credenciales existe en ningún sistema real.
+
+database:
+  host: db.ejemplo.local
+  port: 5432
+  name: app_produccion
+  user: app_service
+  password: "9fKq2mZx7BvLw4Nc"
+
+smtp:
+  host: smtp.ejemplo.local
+  port: 587
+  user: notificaciones@ejemplo.com
+  password: "hT8yU3iO5pA1sD7fG9jK"
+
+redis:
+  host: cache.ejemplo.local
+  password: "qW2eR4tY6uI8oP0aS1dF"
+
+# --- Esto es lo correcto: solo la referencia, nunca el valor ---
+# password_file: /run/secrets/db_password

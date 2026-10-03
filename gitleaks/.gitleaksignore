@@ -1,0 +1,38 @@
+# ============================================================================
+# .gitleaksignore — Ejemplo real usado en este repositorio
+# ============================================================================
+#
+# Este repositorio contiene, por diseño, secretos FICTICIOS en los fixtures y
+# en los ejemplos de los comandos. Eso hace que Gitleaks los detecte a sí mismo.
+#
+# Es el caso perfecto para usar `.gitleaksignore`: en lugar de desactivar reglas
+# (lo cual debilitaría el control), ignoramos hallazgos concretos y verificados.
+#
+# Formato del fingerprint:  <ruta>:<ruleID>:<línea>
+#
+# ⚠️  En modo `git` el formato incluye el hash del commit al principio:
+#     <commit-sha>:<ruta>:<ruleID>:<línea>
+#
+# Cómo obtener los fingerprints:
+#   gitleaks dir -v . --report-path reporte.json
+#   # y luego leer el campo "Fingerprint" de cada hallazgo
+# ============================================================================
+
+# --- Ejemplo 02: el bloque de "salida esperada" y los comandos de ejemplo ---
+02-escaneo-basico/README.md:generic-api-key:37
+02-escaneo-basico/README.md:github-pat:190
+
+# --- Ejemplo 05: el token ficticio del pull request de prueba ---
+05-ci-github-actions/README.md:github-pat:129
+
+# --- Ejemplo 06: la clave de Stripe del escenario de remediación ---
+06-remediacion/README.md:stripe-access-token:47
+
+# --- README principal: el ejemplo de salida de Gitleaks en la sección 1 ---
+README.md:sidekiq-secret:16
+
+# ============================================================================
+#  ⚠️  Los ficheros de fixtures NO se ignoran a propósito:
+#      son precisamente el material de los ejercicios 02 y 03, y deben
+#      seguir detectándose. Ignorarlos aquí vaciaría el curso de contenido.
+# ============================================================================

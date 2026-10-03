@@ -1,0 +1,30 @@
+# ─────────────────────────────────────────────
+# Artefactos de análisis y entorno virtual
+# ─────────────────────────────────────────────
+.venv/
+venv/
+env/
+
+# Cobertura
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.pytest_cache/
+coverage-reports/
+
+# SonarQube / SonarScanner
+.scannerwork/
+sonar-report.json
+antes.json
+despues.json
+sonar-report-task.txt
+
+# Gitleaks
+gitleaks-report.json
+gitleaks-report.html
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.swp

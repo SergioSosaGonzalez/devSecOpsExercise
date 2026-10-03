@@ -1,0 +1,20 @@
+# Configuración usada EXCLUSIVAMENTE por los tests de integración.
+# Ningún valor es una credencial real: son placeholders y datos fijos de prueba.
+
+test_environment:
+  name: "integ-test"
+
+  database:
+    url: "postgresql://test_user:5f4dcc3b5aa765d61d8@localhost:5432/test_db"
+    password: "5f4dcc3b5aa765d61d8327deb882cf99"
+
+  api:
+    base_url: "https://sandbox.ejemplo.com"
+    # Placeholder de documentación: NO es una credencial
+    api_key: "your-api-key-goes-here"
+    # Credencial de un entorno sandbox declarado
+    secret_key: "sk_test_FicticiaParaSandbox0000000000"
+
+  telemetry:
+    correlation_id: "a3f9c2e8b7d1f4a6c0e9b2d5f8a1c4e7b"
+    disabled: true

@@ -1,0 +1,30 @@
+# ============================================================================
+# .gitleaksignore — módulo SonarQube
+# ============================================================================
+#
+# Este módulo contiene, por diseño, credenciales FICTICIAS en los fixtures y
+# en los ejemplos de comandos. Gitleaks las detecta, y está bien que lo haga:
+# son el recordatorio visual de que un secreto en el código es un secreto.
+#
+# Solo se ignoran los hallazgos que están en la DOCUMENTACIÓN (comandos de
+# ejemplo con `-u token:` y similares). Los ficheros de fixtures NO se
+# ignoran a propósito: deben seguir detectándose.
+#
+# Formato del fingerprint:  <ruta>:<ruleID>:<línea>
+#
+# Cómo regenerar este archivo:
+#   gitleaks dir . --redact -v --report-path reporte.json
+#   # y copiar los fingerprints de los hallazgos que quieras ignorar
+# ============================================================================
+
+# --- Ejercicio 02: curl de ejemplo autenticado con un token ficticio ---
+02-clean-as-you-code/README.md:curl-auth-user:236
+
+# --- Ejercicio 03: curl de auditoría de issues ignorados ---
+03-exclusiones-y-falsos-positivos/README.md:curl-auth-user:279
+
+# ============================================================================
+#  Nota: 02-clean-as-you-code/fixtures/src/legacy.py contiene
+#  LEGACY_DB_PASSWORD a propósito y NO está ignorado. Es la "deuda técnica
+#  heredada" que el ejercicio 02 congela, y detectorlo es parte del guion.
+# ============================================================================
