@@ -266,6 +266,41 @@ git push origin exercise/gitleaks-01-basico
 
 ---
 
+## ☁️ GitHub Codespaces
+
+[GitHub Codespaces](https://github.com/features/codespaces) es un **entorno de desarrollo en la nube**: un contenedor Linux con VS Code (en el navegador o en la app de escritorio) ya configurado para este curso. Te evita instalar Docker, Gitleaks, Trivy y el resto de herramientas en tu máquina local.
+
+### Cómo activarlo
+
+1. Abre tu fork en GitHub: `https://github.com/<TU_USUARIO>/devSecOpsExercise`
+2. Pulsa el botón verde **Code** (arriba a la derecha)
+3. Selecciona la pestaña **Codespaces**
+4. Pulsa **Create codespace on main** (o en la rama que prefieras)
+5. Espera ~2 minutos a que se construya la imagen la primera vez. Listo: ya tienes la terminal con todas las herramientas.
+
+> 💡 También puedes crearlo desde la terminal con la [GitHub CLI](https://cli.github.com/): `gh codespace create --repo <TU_USUARIO>/devSecOpsExercise`
+
+### Qué trae preinstalado
+
+| Herramienta | Versión / notas |
+|---|---|
+| `gitleaks` | 8.30.1 (la misma que documenta el curso) |
+| `trivy` | última versión estable |
+| `checkov`, `pre-commit` | vía `pip` |
+| `pytest`, `pytest-cov`, `coverage` | para los fixtures de SonarQube |
+| `sonar-scanner` + Java 21 | para los ejercicios de análisis |
+| Docker + `gh` | dentro del Codespace: ZAP y el servidor SonarQube corren por Docker |
+| Extensiones VS Code | SonarQube for IDE, GitHub Actions, GitLens |
+
+### Cuota y buenas prácticas
+
+- El plan **Free** incluye **120 core-horas/mes** ≈ unas **60 h** al mes con la máquina por defecto (2 cores / 8 GB RAM — suficiente para SonarQube Community).
+- **Detén** el codespace cuando termines (**Code → Codespaces → tu codespace → ⋯ → Stop**): la cuota solo se consume con el entorno **en ejecución**, no con los detenidos.
+- **Delete** elimina el entorno por completo (pierdes los ficheros no subidos a git); **Stop** lo conserva en pausa.
+- Los ejercicios modifican ficheros: haz `commit` y `push` normalmente para no perder trabajo al detenerlo.
+
+---
+
 ## 📚 Índice de herramientas
 
 | Herramienta | Categoría | Etapa del Shift Left | Estado |

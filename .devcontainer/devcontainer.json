@@ -1,0 +1,29 @@
+{
+  "name": "DevSecOps Course",
+  "init": true,
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "forwardPorts": [9000],
+  "portsAttributes": {
+    "9000": {
+      "label": "SonarQube",
+      "onAutoForward": "notify"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "SonarSource.sonarlint-vscode",
+        "github.vscode-github-actions",
+        "eamodio.gitlens"
+      ]
+    }
+  },
+  "postCreateCommand": "git config --global --add safe.directory '*' && gitleaks version && trivy --version && sonar-scanner --version",
+  "remoteUser": "vscode"
+}

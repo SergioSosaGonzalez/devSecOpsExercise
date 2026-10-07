@@ -113,20 +113,20 @@ En Linux hay varias rutas. Elige la que mejor se adapte a tu distribución.
 ```bash
 # 1. Detecta tu arquitectura
 uname -m
-#   x86_64  → amd64
+#   x86_64  → x64
 #   aarch64 → arm64
 
 # 2. Descarga la última versión (ejemplo con v8.30.1)
-wget https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_amd64.tar.gz
+wget https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
 
 # 3. Descomprime
-tar -xzf gitleaks_8.30.1_linux_amd64.tar.gz
+tar -xzf gitleaks_8.30.1_linux_x64.tar.gz
 
 # 4. Instala el binario con permisos de ejecución
 sudo install -m 0755 gitleaks /usr/local/bin/gitleaks
 
 # 5. Limpia y verifica
-rm -rf gitleaks gitleaks_8.30.1_linux_amd64.tar.gz
+rm -rf gitleaks gitleaks_8.30.1_linux_x64.tar.gz
 gitleaks version
 ```
 
@@ -191,7 +191,7 @@ scoop install gitleaks
 
 1. Ve a la página de [releases de Gitleaks](https://github.com/gitleaks/gitleaks/releases).
 2. Descarga el asset correspondiente a tu arquitectura:
-   - `gitleaks_*_windows_amd64.zip` (Intel/AMD 64 bits)
+   - `gitleaks_*_windows_x64.zip` (Intel/AMD 64 bits)
    - `gitleaks_*_windows_arm64.zip` (Windows on ARM)
 3. Extrae el `.zip` en una carpeta, por ejemplo `C:\Tools\gitleaks`.
 4. Añade esa carpeta al **PATH**:
